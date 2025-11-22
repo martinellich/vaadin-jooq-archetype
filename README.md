@@ -8,7 +8,7 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                                \
 -DarchetypeGroupId=ch.martinelli.oss                  \
 -DarchetypeArtifactId=vaadin-jooq-archetype           \
--DarchetypeVersion=0.0.1-SNAPSHOT                     \
+-DarchetypeVersion=0.0.1                              \
 -DgroupId=<my.groupId>                                \
 -DartifactId=<my.artifactId>
 ```
