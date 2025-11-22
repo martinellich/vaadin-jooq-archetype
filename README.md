@@ -1,4 +1,4 @@
-# Maven Archetype to scaffold Applications<br>based on the Simon Martinelli Stack
+# Maven Archetype to Scaffold Applications<br>based on the Simon Martinelli Stack
 
 https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-stack-java-development/
 
