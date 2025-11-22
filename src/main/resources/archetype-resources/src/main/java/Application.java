@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application implements AppShellConfigurator {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VjApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

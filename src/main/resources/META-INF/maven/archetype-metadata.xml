@@ -9,6 +9,7 @@
                 <include>.gitignore</include>
                 <include>mvnw</include>
                 <include>mvnw.cmd</include>
+                <include>README.md</include>
             </includes>
         </fileSet>
         <fileSet>
