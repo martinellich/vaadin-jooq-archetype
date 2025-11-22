@@ -4,9 +4,11 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 
 ## Usage
 
+```bash
 mvn archetype:generate                                \
 -DarchetypeGroupId=ch.martinelli.oss                  \
 -DarchetypeArtifactId=vaadin-jooq-archetype           \
 -DarchetypeVersion=0.0.1-SNAPSHOT                     \
 -DgroupId=<my.groupId>                                \
--DartifactId=<my.artifactId>                          \
+-DartifactId=<my.artifactId>
+```

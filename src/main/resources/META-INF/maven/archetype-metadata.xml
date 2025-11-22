@@ -4,10 +4,23 @@
         xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.2.0 https://maven.apache.org/xsd/archetype-descriptor-1.2.0.xsd"
         name="vaadin-jooq-archetype">
     <fileSets>
+        <fileSet>
+            <includes>
+                <include>.gitignore</include>
+                <include>mvnw</include>
+                <include>mvnw.cmd</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>.mvn</directory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/frontend</directory>
+        </fileSet>
         <fileSet filtered="true" packaged="true">
             <directory>src/main/java</directory>
         </fileSet>
-        <fileSet>
+        <fileSet filtered="true" packaged="true">
             <directory>src/test/java</directory>
         </fileSet>
     </fileSets>
