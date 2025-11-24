@@ -11,7 +11,6 @@ class HelloWorldViewIT extends PlaywrightIT {
 	@Test
 	void say_hello() {
 		page.navigate("http://localhost:%d".formatted(localServerPort));
-		var mopo = new Mopo(page);
 
 		var appName = page.locator("h1");
 		assertThat(appName.innerText()).isEqualTo("Vaadin jOOQ Template");
