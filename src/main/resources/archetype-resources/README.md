@@ -17,7 +17,7 @@ Before running the application, the jOOQ metamodel has to be generated using the
 
     ./mvnw compile
 
-Then you can run the application with a database started by Testcontainers from your IDE using the `TestVjApplication`.
+Then you can run the application with a database started by Testcontainers from your IDE using the `TestApplication`.
 
 **Important:**
 This class uses the [Spring Boot Testcontainers support](https://spring.io/blog/2023/06/23/improved-testcontainers-support-in-spring-boot-3-1/), introduced with Spring Boot 3.1.

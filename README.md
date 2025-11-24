@@ -1,4 +1,4 @@
-# Maven Archetype to scaffold Applications<br>based on the Simon Martinelli Stack
+# Maven Archetype to Scaffold Applications<br>based on the Simon Martinelli Stack
 
 https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-stack-java-development/
 
@@ -8,7 +8,15 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                                \
 -DarchetypeGroupId=ch.martinelli.oss                  \
 -DarchetypeArtifactId=vaadin-jooq-archetype           \
--DarchetypeVersion=0.0.1-SNAPSHOT                     \
+-DarchetypeVersion=0.0.2                              \
 -DgroupId=<my.groupId>                                \
 -DartifactId=<my.artifactId>
 ```
+
+## Release Notes
+
+### 0.0.2
+- Removed Testcontainers jOOQ Plugin because of compatibility issues with the newest Docker version
+
+### 0.0.1
+- Initial release
