@@ -1,6 +1,6 @@
 package ${package}.core.ui;
 
-import ${package}.TestVjConfiguration;
+import ${package}.TestConfiguration;
 import com.github.mvysny.fakeservlet.FakeRequest;
 import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
@@ -23,7 +23,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import java.util.List;
 import java.util.Locale;
 
-@Import(TestVjConfiguration.class)
+@Import(TestConfiguration.class)
 @SpringBootTest
 public abstract class KaribuTest {
 

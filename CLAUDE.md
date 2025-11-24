@@ -115,7 +115,7 @@ Generated applications include three types of tests:
 1. **Unit Tests** (`*Test.java`): Karibu Testing for Vaadin UI components
    - Extend `KaribuTest` base class
    - Provides `login(username, roles)` and `logout()` helpers
-   - Mock Spring context with `TestVjConfiguration`
+   - Mock Spring context with `TestConfiguration`
 
 2. **Integration Tests** (`*IT.java`): Playwright for end-to-end browser testing
    - Extend `PlaywrightIT` base class
