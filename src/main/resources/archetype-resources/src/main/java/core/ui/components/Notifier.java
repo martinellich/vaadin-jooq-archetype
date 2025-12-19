@@ -26,7 +26,7 @@ public class Notifier extends Notification {
 	}
 
 	public static void error(String message) {
-		var text = new NativeLabel(message);
+		var text = new Span(message);
 		var close = new Button("OK");
 
 		var content = new HorizontalLayout(text, close);
