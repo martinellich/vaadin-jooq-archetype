@@ -113,10 +113,10 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 		grid.addColumn(u -> String.join(", ", u.getRoles())).setHeader(getTranslation("Roles")).setAutoWidth(true);
 
 		var addIcon = LineAwesomeIcon.PLUS_SOLID.create();
-		addIcon.addClickListener(e -> clearForm());
+		addIcon.addClickListener(_ -> clearForm());
 		grid.addComponentColumn(u -> {
 			var deleteIcon = LineAwesomeIcon.TRASH_SOLID.create();
-			deleteIcon.addClickListener(e -> new ConfirmDialog(getTranslation("Delete User?"),
+			deleteIcon.addClickListener(_ -> new ConfirmDialog(getTranslation("Delete User?"),
 					getTranslation("Do you really want to delete the user {0}?", u.getUser().getUsername()),
 					getTranslation("Delete"), confirmEvent -> {
 						userDAO.deleteUserAndRolesByUsername(u.getUser().getUsername());
@@ -196,12 +196,12 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 	private HorizontalLayout createButtonLayout() {
 		var buttonLayout = new HorizontalLayout();
 
-		cancel.addClickListener(e -> {
+		cancel.addClickListener(_ -> {
 			clearForm();
 			refreshGrid();
 		});
 
-		save.addClickListener(e -> {
+		save.addClickListener(_ -> {
 			var validationStatus = binder.validate();
 			if (user != null && validationStatus.isOk()) {
 				try {

@@ -31,7 +31,7 @@ import java.util.Locale;
 
 @AnonymousAllowed
 @Layout
-public class MainLayout extends AppLayout {
+public class MainLayout extends AppLayout implements AfterNavigationObserver {
 
 	private final transient SecurityContext securityContext;
 
@@ -49,8 +49,7 @@ public class MainLayout extends AppLayout {
 	}
 
 	@Override
-	protected void afterNavigation() {
-		super.afterNavigation();
+	public void afterNavigation(AfterNavigationEvent event) {
 		viewTitle.setText(getCurrentPageTitle());
 	}
 
@@ -64,8 +63,8 @@ public class MainLayout extends AppLayout {
 	}
 
 	private void addDrawerContent() {
-		var appName = new H1("Vaadin jOOQ Template");
-		appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
+		var appName = new Div("Vaadin jOOQ Template");
+		appName.addClassNames(LumoUtility.FontSize.XLARGE, LumoUtility.FontWeight.BLACK, LumoUtility.Margin.MEDIUM);
 
 		var header = new Header(appName);
 
@@ -101,12 +100,12 @@ public class MainLayout extends AppLayout {
 		var languageSwitchEn = new Button("EN");
 		languageSwitchEn.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
 		languageSwitchEn.setEnabled(!Locale.ENGLISH.getLanguage().equals(locale.getLanguage()));
-		languageSwitchEn.addClickListener(e -> switchLanguage(Locale.ENGLISH.getLanguage()));
+		languageSwitchEn.addClickListener(_ -> switchLanguage(Locale.ENGLISH.getLanguage()));
 
 		var languageSwitchDe = new Button("DE");
 		languageSwitchDe.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
 		languageSwitchDe.setEnabled(!Locale.GERMAN.getLanguage().equals(locale.getLanguage()));
-		languageSwitchDe.addClickListener(e -> switchLanguage(Locale.GERMAN.getLanguage()));
+		languageSwitchDe.addClickListener(_ -> switchLanguage(Locale.GERMAN.getLanguage()));
 
 		var languageLayout = new HorizontalLayout(languageSwitchEn, languageSwitchDe);
 		languageLayout.addClassNames(LumoUtility.Margin.SMALL, LumoUtility.Margin.Top.XLARGE);
@@ -135,7 +134,7 @@ public class MainLayout extends AppLayout {
 			div.add(LumoIcon.DROPDOWN.create());
 			div.addClassNames(LumoUtility.Display.FLEX, LumoUtility.AlignItems.CENTER, LumoUtility.Gap.SMALL);
 			userName.add(div);
-			userName.getSubMenu().addItem(getTranslation("Sign out"), e -> securityContext.logout());
+			userName.getSubMenu().addItem(getTranslation("Sign out"), _ -> securityContext.logout());
 
 			verticalLayout.add(userMenu);
 		}
