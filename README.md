@@ -8,15 +8,18 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                                \
 -DarchetypeGroupId=ch.martinelli.oss                  \
 -DarchetypeArtifactId=vaadin-jooq-archetype           \
--DarchetypeVersion=0.0.3                             \
+-DarchetypeVersion=1.0.0                             \
 -DgroupId=<my.groupId>                                \
 -DartifactId=<my.artifactId>
 ```
 
 ## Release Notes
 
+### 1-0.0
+- Migration to Vaadin 25 and Spring Boot 4
+
 ### 0.0.3
-- Fixed warnings because of wrong configuration in archetype-metadata.xml
+- Fixed warnings because of the wrong configuration in archetype-metadata.xml
 
 ### 0.0.2
 - Removed Testcontainers jOOQ Plugin because of compatibility issues with the newest Docker version
