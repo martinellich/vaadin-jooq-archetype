@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>4.0.1</version>
     </parent>
 
     <groupId>${groupId}</groupId>
@@ -16,27 +16,26 @@
 
     <properties>
         <java.version>25</java.version>
-        <vaadin.version>24.9.3</vaadin.version>
+        <vaadin.version>25.0.0</vaadin.version>
         <line-awesome.version>2.1.0</line-awesome.version>
 
-        <jooq.version>3.20.9</jooq.version>
+        <jooq.version>3.20.10</jooq.version>
         <jooq-spring.version>0.4.0</jooq-spring.version>
         <jooq-utilities.version>1.1.2</jooq-utilities.version>
         <vaadin-jooq.version>2.0.4</vaadin-jooq.version>
 
-        <testcontainers.version>2.0.2</testcontainers.version>
-        <flyway-maven-plugin.version>11.15.0</flyway-maven-plugin.version>
+        <flyway-maven-plugin.version>11.19.1</flyway-maven-plugin.version>
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
 
-        <karibu-testing.version>2.5.0</karibu-testing.version>
-        <playwright.version>1.56.0</playwright.version>
-        <mopo.version>0.0.5</mopo.version>
+        <karibu-testing.version>2.6.1</karibu-testing.version>
+        <playwright.version>1.57.0</playwright.version>
+        <mopo.version>0.0.6</mopo.version>
         <archunit.version>1.4.1</archunit.version>
         <jacoco.version>0.8.14</jacoco.version>
 
         <jspecify.version>1.0.0</jspecify.version>
-        <errorprone.version>2.43.0</errorprone.version>
-        <nullaway.version>0.12.12</nullaway.version>
+        <errorprone.version>2.45.0</errorprone.version>
+        <nullaway.version>0.12.14</nullaway.version>
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
 
         <db.image>postgres:latest</db.image>
@@ -85,6 +84,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-flyway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
@@ -97,6 +100,12 @@
             <groupId>org.parttio</groupId>
             <artifactId>line-awesome</artifactId>
             <version>${line-awesome.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.4</version>
         </dependency>
 
         <dependency>
@@ -131,11 +140,15 @@
         </dependency>
 
         <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -305,18 +318,6 @@
                     <wait>500</wait>
                     <maxAttempts>240</maxAttempts>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>${vaadin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -113,10 +113,10 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 		grid.addColumn(u -> String.join(", ", u.getRoles())).setHeader(getTranslation("Roles")).setAutoWidth(true);
 
 		var addIcon = LineAwesomeIcon.PLUS_SOLID.create();
-		addIcon.addClickListener(e -> clearForm());
+		addIcon.addClickListener(_ -> clearForm());
 		grid.addComponentColumn(u -> {
 			var deleteIcon = LineAwesomeIcon.TRASH_SOLID.create();
-			deleteIcon.addClickListener(e -> new ConfirmDialog(getTranslation("Delete User?"),
+			deleteIcon.addClickListener(_ -> new ConfirmDialog(getTranslation("Delete User?"),
 					getTranslation("Do you really want to delete the user {0}?", u.getUser().getUsername()),
 					getTranslation("Delete"), confirmEvent -> {
 						userDAO.deleteUserAndRolesByUsername(u.getUser().getUsername());
@@ -174,9 +174,12 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 			.bind(u -> u.getUser().getLastName(), (u, s) -> u.getUser().setLastName(s));
 
 		var passwordField = new PasswordField(getTranslation("Password"));
-		binder.forField(passwordField)
-			.asRequired()
-			.bind(u -> "", (u, s) -> u.getUser().setHashedPassword(passwordEncoder.encode(s)));
+		binder.forField(passwordField).asRequired().bind(_ -> "", (u, s) -> {
+			String encoded = passwordEncoder.encode(s);
+			if (encoded != null) {
+				u.getUser().setHashedPassword(encoded);
+			}
+		});
 
 		var roleMultiSelect = new MultiSelectComboBox<String>(getTranslation("Roles"));
 		binder.forField(roleMultiSelect).bind(UserWithRoles::getRoles, UserWithRoles::setRoles);
@@ -196,12 +199,12 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 	private HorizontalLayout createButtonLayout() {
 		var buttonLayout = new HorizontalLayout();
 
-		cancel.addClickListener(e -> {
+		cancel.addClickListener(_ -> {
 			clearForm();
 			refreshGrid();
 		});
 
-		save.addClickListener(e -> {
+		save.addClickListener(_ -> {
 			var validationStatus = binder.validate();
 			if (user != null && validationStatus.isOk()) {
 				try {

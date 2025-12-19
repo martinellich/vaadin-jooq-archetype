@@ -21,7 +21,7 @@ public class HelloWorldView extends VerticalLayout implements HasDynamicTitle {
 
 		var sayHello = new Button(getTranslation("Say hello"));
 		sayHello.setId("say-hello");
-		sayHello.addClickListener(e -> Notifier.info(getTranslation("Hello {0}", name.getValue())));
+		sayHello.addClickListener(_ -> Notifier.info(getTranslation("Hello {0}", name.getValue())));
 		sayHello.addClickShortcut(Key.ENTER);
 
 		add(name, sayHello);

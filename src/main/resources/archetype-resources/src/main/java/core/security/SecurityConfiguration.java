@@ -1,14 +1,12 @@
 package ${package}.core.security;
 
-import com.vaadin.flow.spring.security.VaadinAwareSecurityContextHolderStrategyConfiguration;
 import com.vaadin.flow.spring.security.VaadinSecurityConfigurer;
 import com.vaadin.flow.spring.security.stateless.VaadinStatelessSecurityConfigurer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.boot.actuate.health.HealthEndpoint;
+import org.springframework.boot.health.actuate.endpoint.HealthEndpoint;
+import org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +19,6 @@ import java.util.Base64;
 
 @Configuration
 @EnableWebSecurity
-@Import(VaadinAwareSecurityContextHolderStrategyConfiguration.class)
 public class SecurityConfiguration {
 
 	private final String authSecret;
@@ -36,7 +33,7 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http) {
 		http.authorizeHttpRequests(c -> c.requestMatchers("/images/*.png", "/line-awesome/*")
 			.permitAll()
 			.requestMatchers(EndpointRequest.to(HealthEndpoint.class))

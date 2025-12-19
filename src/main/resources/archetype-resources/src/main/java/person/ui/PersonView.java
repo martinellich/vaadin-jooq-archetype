@@ -106,10 +106,10 @@ public class PersonView extends Div implements HasUrlParameter<Long>, HasDynamic
 		}).setHeader(getTranslation("Important")).setAutoWidth(true);
 
 		var addIcon = LineAwesomeIcon.PLUS_SOLID.create();
-		addIcon.addClickListener(e -> clearForm());
+		addIcon.addClickListener(_ -> clearForm());
 		grid.addComponentColumn(p -> {
 			var deleteIcon = LineAwesomeIcon.TRASH_SOLID.create();
-			deleteIcon.addClickListener(e -> new ConfirmDialog(getTranslation("Delete Person?"),
+			deleteIcon.addClickListener(_ -> new ConfirmDialog(getTranslation("Delete Person?"),
 					getTranslation("Do you really want to delete the person {0} {1}?", p.getFirstName(),
 							p.getLastName()),
 					getTranslation("Delete"), confirmEvent -> {
@@ -188,12 +188,12 @@ public class PersonView extends Div implements HasUrlParameter<Long>, HasDynamic
 	private HorizontalLayout createButtonLayout() {
 		var buttonLayout = new HorizontalLayout();
 
-		cancel.addClickListener(e -> {
+		cancel.addClickListener(_ -> {
 			clearForm();
 			refreshGrid();
 		});
 
-		save.addClickListener(e -> {
+		save.addClickListener(_ -> {
 			if (binder.validate().isOk()) {
 				try {
 					binder.writeChangedBindingsToBean(person);
