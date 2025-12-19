@@ -174,9 +174,12 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 			.bind(u -> u.getUser().getLastName(), (u, s) -> u.getUser().setLastName(s));
 
 		var passwordField = new PasswordField(getTranslation("Password"));
-		binder.forField(passwordField)
-			.asRequired()
-			.bind(u -> "", (u, s) -> u.getUser().setHashedPassword(passwordEncoder.encode(s)));
+		binder.forField(passwordField).asRequired().bind(_ -> "", (u, s) -> {
+			String encoded = passwordEncoder.encode(s);
+			if (encoded != null) {
+				u.getUser().setHashedPassword(encoded);
+			}
+		});
 
 		var roleMultiSelect = new MultiSelectComboBox<String>(getTranslation("Roles"));
 		binder.forField(roleMultiSelect).bind(UserWithRoles::getRoles, UserWithRoles::setRoles);
