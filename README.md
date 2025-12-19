@@ -15,7 +15,7 @@ mvn archetype:generate                                \
 
 ## Release Notes
 
-### 1-0.0
+### 1.0.0
 - Migration to Vaadin 25 and Spring Boot 4
 
 ### 0.0.3
