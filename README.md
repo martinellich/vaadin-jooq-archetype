@@ -8,14 +8,14 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                               \
 -DarchetypeGroupId=ch.martinelli.oss                 \
 -DarchetypeArtifactId=vaadin-jooq-archetype          \
--DarchetypeVersion=1.0.1                             \
+-DarchetypeVersion=1.0.2                             \
 -DgroupId=<my.groupId>                               \
 -DartifactId=<my.artifactId>
 ```
 
 ## Release Notes
 
-### 1.0.1
+### 1.0.2
 - Added missing Vaadin plugin
 
 ### 1.0.0
