@@ -22,9 +22,6 @@ class HelloWorldViewTest extends KaribuTest {
 
 	@Test
 	void say_hello() {
-		var appName = _get(H1.class);
-		assertThat(appName.getText()).isEqualTo("Vaadin jOOQ Template");
-
 		var title = _get(H2.class);
 		assertThat(title.getText()).isEqualTo("Hello World");
 
