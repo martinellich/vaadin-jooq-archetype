@@ -8,14 +8,17 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                               \
 -DarchetypeGroupId=ch.martinelli.oss                 \
 -DarchetypeArtifactId=vaadin-jooq-archetype          \
--DarchetypeVersion=1.0.3                             \
+-DarchetypeVersion=1.1.1                             \
 -DgroupId=<my.groupId>                               \
 -DartifactId=<my.artifactId>
 ```
 
 ## Release Notes
 
-### 1.0.3
+### 1.1.1
+- Fixed failing test
+
+### 1.1.0
 - Dependency updates
 
 ### 1.0.2
