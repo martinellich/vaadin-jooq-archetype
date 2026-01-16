@@ -15,7 +15,7 @@ mvn archetype:generate                               \
 
 ## Release Notes
 
-### 1.0.3
+### 1.1.0
 - Dependency updates
 
 ### 1.0.2
