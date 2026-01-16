@@ -16,15 +16,15 @@
 
     <properties>
         <java.version>25</java.version>
-        <vaadin.version>25.0.0</vaadin.version>
+        <vaadin.version>25.0.3</vaadin.version>
         <line-awesome.version>2.1.0</line-awesome.version>
 
         <jooq.version>3.20.10</jooq.version>
         <jooq-spring.version>0.4.0</jooq-spring.version>
         <jooq-utilities.version>1.1.2</jooq-utilities.version>
-        <vaadin-jooq.version>2.0.4</vaadin-jooq.version>
+        <vaadin-jooq.version>2.1.1</vaadin-jooq.version>
 
-        <flyway-maven-plugin.version>11.19.1</flyway-maven-plugin.version>
+        <flyway-maven-plugin.version>11.20.2</flyway-maven-plugin.version>
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
 
         <karibu-testing.version>2.6.1</karibu-testing.version>
@@ -34,8 +34,8 @@
         <jacoco.version>0.8.14</jacoco.version>
 
         <jspecify.version>1.0.0</jspecify.version>
-        <errorprone.version>2.45.0</errorprone.version>
-        <nullaway.version>0.12.14</nullaway.version>
+        <errorprone.version>2.46.0</errorprone.version>
+        <nullaway.version>0.12.15</nullaway.version>
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
 
         <db.image>postgres:latest</db.image>
@@ -91,7 +91,7 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.seventytwo.oss</groupId>
+            <groupId>ch.martinelli.oss</groupId>
             <artifactId>vaadin-jooq</artifactId>
             <version>${vaadin-jooq.version}</version>
         </dependency>
