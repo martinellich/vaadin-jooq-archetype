@@ -23,7 +23,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.*;
-import io.seventytwo.vaadinjooq.util.VaadinJooqUtil;
+import ch.martinelli.oss.util.VaadinJooqUtil;
 import jakarta.annotation.security.RolesAllowed;
 import org.jooq.exception.DataAccessException;
 import org.jspecify.annotations.Nullable;
