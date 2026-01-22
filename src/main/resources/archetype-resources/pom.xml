@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2</version>
     </parent>
 
     <groupId>${groupId}</groupId>
@@ -35,7 +35,7 @@
 
         <jspecify.version>1.0.0</jspecify.version>
         <errorprone.version>2.46.0</errorprone.version>
-        <nullaway.version>0.12.15</nullaway.version>
+        <nullaway.version>0.13.0</nullaway.version>
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
 
         <db.image>postgres:latest</db.image>
