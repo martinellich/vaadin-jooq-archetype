@@ -3,7 +3,7 @@ package ${package}.greeting.ui;
 import ${package}.core.ui.KaribuTest;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.textfield.TextField;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +22,9 @@ class HelloWorldViewTest extends KaribuTest {
 
 	@Test
 	void say_hello() {
+		var appName = _get(Div.class, spec -> spec.withClasses("text-xl"));
+		assertThat(appName.getText()).isEqualTo("Vaadin jOOQ Template");
+
 		var title = _get(H2.class);
 		assertThat(title.getText()).isEqualTo("Hello World");
 

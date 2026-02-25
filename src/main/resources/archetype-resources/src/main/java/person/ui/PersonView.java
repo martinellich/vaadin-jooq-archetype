@@ -46,7 +46,7 @@ public class PersonView extends Div implements HasUrlParameter<Long>, HasDynamic
 
 	private final Binder<PersonRecord> binder = new Binder<>();
 
-	@Nullable private PersonRecord person;
+	private @Nullable PersonRecord person;
 
 	public PersonView(PersonDAO personDao) {
 		this.personDao = personDao;

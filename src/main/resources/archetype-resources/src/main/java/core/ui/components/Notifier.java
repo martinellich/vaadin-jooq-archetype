@@ -1,7 +1,7 @@
 package ${package}.core.ui.components;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -26,7 +26,7 @@ public class Notifier extends Notification {
 	}
 
 	public static void error(String message) {
-		var text = new Span(message);
+		var text = new NativeLabel(message);
 		var close = new Button("OK");
 
 		var content = new HorizontalLayout(text, close);

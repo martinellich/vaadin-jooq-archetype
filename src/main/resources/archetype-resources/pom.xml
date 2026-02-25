@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.2</version>
+        <version>4.0.3</version>
     </parent>
 
     <groupId>${groupId}</groupId>
@@ -16,26 +16,26 @@
 
     <properties>
         <java.version>25</java.version>
-        <vaadin.version>25.0.3</vaadin.version>
+        <vaadin.version>25.0.6</vaadin.version>
         <line-awesome.version>2.1.0</line-awesome.version>
 
-        <jooq.version>3.20.10</jooq.version>
+        <jooq.version>3.20.11</jooq.version>
         <jooq-spring.version>0.4.0</jooq-spring.version>
         <jooq-utilities.version>1.1.2</jooq-utilities.version>
         <vaadin-jooq.version>2.1.1</vaadin-jooq.version>
 
-        <flyway-maven-plugin.version>11.20.2</flyway-maven-plugin.version>
+        <flyway-maven-plugin.version>12.0.2</flyway-maven-plugin.version>
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
 
-        <karibu-testing.version>2.6.1</karibu-testing.version>
-        <playwright.version>1.57.0</playwright.version>
+        <karibu-testing.version>2.7.0</karibu-testing.version>
+        <playwright.version>1.58.0</playwright.version>
         <mopo.version>0.0.6</mopo.version>
         <archunit.version>1.4.1</archunit.version>
         <jacoco.version>0.8.14</jacoco.version>
 
         <jspecify.version>1.0.0</jspecify.version>
-        <errorprone.version>2.46.0</errorprone.version>
-        <nullaway.version>0.13.0</nullaway.version>
+        <errorprone.version>2.47.0</errorprone.version>
+        <nullaway.version>0.13.1</nullaway.version>
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
 
         <db.image>postgres:latest</db.image>
@@ -105,7 +105,7 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>4.0.4</version>
+            <version>4.0.5</version>
         </dependency>
 
         <dependency>
