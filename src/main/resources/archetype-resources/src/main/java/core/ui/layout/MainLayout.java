@@ -3,7 +3,6 @@ package ${package}.core.ui.layout;
 import ${package}.core.security.SecurityContext;
 import ${package}.core.ui.UserView;
 import ${package}.greeting.ui.HelloWorldView;
-import ${package}.person.ui.PersonView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -75,14 +74,11 @@ public class MainLayout extends AppLayout implements AfterNavigationObserver {
 		var nav = new SideNav();
 
 		if (accessAnnotationChecker.hasAccess(HelloWorldView.class)) {
-			nav.addItem(
-					new SideNavItem(getTranslation("Hello World"), HelloWorldView.class, VaadinIcon.GLOBE.create()));
-		}
-		if (accessAnnotationChecker.hasAccess(PersonView.class)) {
-			nav.addItem(new SideNavItem(getTranslation("Persons"), PersonView.class, VaadinIcon.ARCHIVES.create()));
+			nav.addItem(new SideNavItem(getTranslation("view.hello.world.title"), HelloWorldView.class,
+					VaadinIcon.GLOBE.create()));
 		}
 		if (accessAnnotationChecker.hasAccess(UserView.class)) {
-			nav.addItem(new SideNavItem(getTranslation("Users"), UserView.class, VaadinIcon.USER.create()));
+			nav.addItem(new SideNavItem(getTranslation("view.users.title"), UserView.class, VaadinIcon.USER.create()));
 		}
 
 		return nav;
@@ -132,12 +128,12 @@ public class MainLayout extends AppLayout implements AfterNavigationObserver {
 			div.add(LumoIcon.DROPDOWN.create());
 			div.addClassNames(LumoUtility.Display.FLEX, LumoUtility.AlignItems.CENTER, LumoUtility.Gap.SMALL);
 			userName.add(div);
-			userName.getSubMenu().addItem(getTranslation("Sign out"), _ -> securityContext.logout());
+			userName.getSubMenu().addItem(getTranslation("action.sign.out"), _ -> securityContext.logout());
 
 			verticalLayout.add(userMenu);
 		}
 		else {
-			var loginLink = new Anchor("login", getTranslation("Sign in"));
+			var loginLink = new Anchor("login", getTranslation("action.sign.in"));
 			verticalLayout.add(loginLink);
 		}
 

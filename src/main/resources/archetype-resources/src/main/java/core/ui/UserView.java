@@ -44,13 +44,13 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 
 	private final Grid<UserWithRoles> grid = new Grid<>();
 
-	private final Button cancel = new Button(getTranslation("Cancel"));
+	private final Button cancel = new Button(getTranslation("action.cancel"));
 
-	private final Button save = new Button(getTranslation("Save"));
+	private final Button save = new Button(getTranslation("action.save"));
 
 	private final Binder<UserWithRoles> binder = new Binder<>();
 
-	private final TextField usernameField = new TextField(getTranslation("Username"));
+	private final TextField usernameField = new TextField(getTranslation("user.field.username"));
 
 	@Nullable private transient UserWithRoles user;
 
@@ -71,7 +71,7 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 
 	@Override
 	public String getPageTitle() {
-		return getTranslation("Users");
+		return getTranslation("view.users.title");
 	}
 
 	@Override
@@ -96,33 +96,33 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 		grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
 
 		var usernameColumn = grid.addColumn(u -> u.getUser().getUsername())
-			.setHeader(getTranslation("Username"))
+			.setHeader(getTranslation("user.field.username"))
 			.setSortable(true)
 			.setSortProperty(USER.USERNAME.getName())
 			.setAutoWidth(true);
 		grid.addColumn(u -> u.getUser().getFirstName())
-			.setHeader(getTranslation("First Name"))
+			.setHeader(getTranslation("user.field.first.name"))
 			.setSortable(true)
 			.setSortProperty(USER.FIRST_NAME.getName())
 			.setAutoWidth(true);
 		grid.addColumn(u -> u.getUser().getLastName())
-			.setHeader(getTranslation("Last Name"))
+			.setHeader(getTranslation("user.field.last.name"))
 			.setSortable(true)
 			.setSortProperty(USER.LAST_NAME.getName())
 			.setAutoWidth(true);
-		grid.addColumn(u -> String.join(", ", u.getRoles())).setHeader(getTranslation("Roles")).setAutoWidth(true);
+		grid.addColumn(u -> String.join(", ", u.getRoles())).setHeader(getTranslation("user.field.roles")).setAutoWidth(true);
 
 		var addIcon = LineAwesomeIcon.PLUS_SOLID.create();
 		addIcon.addClickListener(_ -> clearForm());
 		grid.addComponentColumn(u -> {
 			var deleteIcon = LineAwesomeIcon.TRASH_SOLID.create();
-			deleteIcon.addClickListener(_ -> new ConfirmDialog(getTranslation("Delete User?"),
-					getTranslation("Do you really want to delete the user {0}?", u.getUser().getUsername()),
-					getTranslation("Delete"), confirmEvent -> {
+			deleteIcon.addClickListener(_ -> new ConfirmDialog(getTranslation("notification.user.deleted.confirm"),
+					getTranslation("notification.user.deleted.confirm.message", u.getUser().getUsername()),
+					getTranslation("action.delete"), confirmEvent -> {
 						userDAO.deleteUserAndRolesByUsername(u.getUser().getUsername());
 						clearForm();
 						refreshGrid();
-					}, getTranslation("Cancel"), cancelEvent -> {
+					}, getTranslation("action.cancel"), cancelEvent -> {
 					})
 				.open());
 			return deleteIcon;
@@ -163,17 +163,17 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 			.asRequired()
 			.bind(u -> u.getUser().getUsername(), (u, s) -> u.getUser().setUsername(s));
 
-		var firstNameField = new TextField(getTranslation("First Name"));
+		var firstNameField = new TextField(getTranslation("user.field.first.name"));
 		binder.forField(firstNameField)
 			.asRequired()
 			.bind(u -> u.getUser().getFirstName(), (u, s) -> u.getUser().setFirstName(s));
 
-		var lastNameField = new TextField(getTranslation("Last Name"));
+		var lastNameField = new TextField(getTranslation("user.field.last.name"));
 		binder.forField(lastNameField)
 			.asRequired()
 			.bind(u -> u.getUser().getLastName(), (u, s) -> u.getUser().setLastName(s));
 
-		var passwordField = new PasswordField(getTranslation("Password"));
+		var passwordField = new PasswordField(getTranslation("user.field.password"));
 		binder.forField(passwordField).asRequired().bind(_ -> "", (u, s) -> {
 			String encoded = passwordEncoder.encode(s);
 			if (encoded != null) {
@@ -181,7 +181,7 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 			}
 		});
 
-		var roleMultiSelect = new MultiSelectComboBox<String>(getTranslation("Roles"));
+		var roleMultiSelect = new MultiSelectComboBox<String>(getTranslation("user.field.roles"));
 		binder.forField(roleMultiSelect).bind(UserWithRoles::getRoles, UserWithRoles::setRoles);
 
 		roleMultiSelect.setItems(Set.of(Role.ADMIN, Role.USER));
@@ -212,14 +212,14 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 
 					try {
 						userDAO.save(user);
-						Notifier.success(getTranslation("User saved"));
+						Notifier.success(getTranslation("notification.user.saved"));
 					}
 					catch (DataAccessException _) {
-						Notifier.error(getTranslation("User could not be saved!"));
+						Notifier.error(getTranslation("notification.user.save.error"));
 					}
 				}
 				catch (ValidationException ex) {
-					Notifier.error(getTranslation("There have been validation errors!"));
+					Notifier.error(getTranslation("notification.validation.errors"));
 					ex.getValidationErrors()
 						.forEach(validationResult -> Notifier.error(validationResult.getErrorMessage()));
 				}
