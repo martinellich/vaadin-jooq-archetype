@@ -8,12 +8,15 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                               \
 -DarchetypeGroupId=ch.martinelli.oss                 \
 -DarchetypeArtifactId=vaadin-jooq-archetype          \
--DarchetypeVersion=1.1.6                             \
+-DarchetypeVersion=1.1.7                             \
 -DgroupId=<my.groupId>                               \
 -DartifactId=<my.artifactId>
 ```
 
 ## Release Notes
+
+### 1.1.7
+- Formatting
 
 ### 1.1.6
 - JaCoCo exclusions in path format
