@@ -2,11 +2,9 @@ package ${package}.user.ui;
 
 import ${package}.core.domain.Role;
 import ${package}.core.domain.UserWithRoles;
-import ${package}.core.ui.KaribuTest;
+import ${package}.core.ui.AbstractBrowserlessTest;
 import ${package}.core.ui.UserView;
-import com.github.mvysny.kaributesting.v10.GridKt;
-import com.github.mvysny.kaributesting.v10.pro.ConfirmDialogKt;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
@@ -14,123 +12,120 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.test.context.support.WithMockUser;
 
-import java.util.List;
 import java.util.Set;
 
-import static com.github.mvysny.kaributesting.v10.LocatorJ.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserViewTest extends KaribuTest {
-
-	@BeforeEach
-	void navigate() {
-		login("admin", List.of(Role.ADMIN));
-		UI.getCurrent().getPage().reload();
-		UI.getCurrent().navigate(UserView.class);
-	}
+@WithMockUser(username = "admin", roles = Role.ADMIN)
+class UserViewTest extends AbstractBrowserlessTest {
 
 	@Test
 	void check_grid_size() {
-		var grid = _get(Grid.class);
-		assertThat(GridKt._size(grid)).isEqualTo(2);
+		navigate(UserView.class);
+
+		Grid<UserWithRoles> grid = $(Grid.class).single();
+		assertThat(test(grid).size()).isEqualTo(2);
 	}
 
 	@Test
 	void navigate_to_user() {
-		UI.getCurrent().navigate(UserView.class, "admin");
+		navigate(UserView.class, "admin");
 
-		var grid = _get(Grid.class);
-		assertThat(GridKt._size(grid)).isEqualTo(2);
+		Grid<UserWithRoles> grid = $(Grid.class).single();
+		assertThat(test(grid).size()).isEqualTo(2);
 
-		@SuppressWarnings("unchecked")
 		Set<UserWithRoles> selectedItems = grid.getSelectedItems();
 		assertThat(selectedItems).hasSize(1)
 			.first()
 			.extracting(userWithRoles -> userWithRoles.getUser().getFirstName())
 			.isEqualTo("Emma");
 
-		var firstNameTextField = _get(TextField.class, s -> s.withLabel("First Name"));
+		TextField firstNameTextField = $(TextField.class).withCaption("First Name").single();
 		assertThat(firstNameTextField.getValue()).isEqualTo("Emma");
 	}
 
 	@Test
 	void delete_person() {
-		var grid = _get(Grid.class);
-		assertThat(GridKt._size(grid)).isEqualTo(2);
+		navigate(UserView.class);
 
-		@SuppressWarnings("unchecked")
-		var component = GridKt._getCellComponent(grid, 0, "actions");
+		Grid<UserWithRoles> grid = $(Grid.class).single();
+		assertThat(test(grid).size()).isEqualTo(2);
+
+		Component component = test(grid).getCellComponent(0, "actions");
 		assertThat(component).isInstanceOf(SvgIcon.class);
-		_click((SvgIcon) component);
+		test((SvgIcon) component).click();
 
-		var confirmDialog = _get(ConfirmDialog.class);
-		ConfirmDialogKt._fireConfirm(confirmDialog);
+		ConfirmDialog confirmDialog = $(ConfirmDialog.class).single();
+		test(confirmDialog).confirm();
 
-		assertThat(GridKt._size(grid)).isEqualTo(1);
+		assertThat(test(grid).size()).isEqualTo(1);
 	}
 
 	@Test
 	void save_new_user() {
-		var grid = _get(Grid.class);
-		var initialSize = GridKt._size(grid);
+		navigate(UserView.class);
 
-		var addIcon = _get(SvgIcon.class);
-		_click(addIcon);
+		Grid<UserWithRoles> grid = $(Grid.class).single();
+		int initialSize = test(grid).size();
 
-		var usernameField = _get(TextField.class, spec -> spec.withLabel("Username"));
-		var firstNameField = _get(TextField.class, spec -> spec.withLabel("First Name"));
-		var lastNameField = _get(TextField.class, spec -> spec.withLabel("Last Name"));
-		var passwordField = _get(PasswordField.class, spec -> spec.withLabel("Password"));
-		@SuppressWarnings("unchecked")
-		var roleMultiSelect = _get(MultiSelectComboBox.class, spec -> spec.withLabel("Roles"));
+		SvgIcon addIcon = (SvgIcon) grid.getColumnByKey("actions").getHeaderComponent();
+		test(addIcon).click();
 
-		usernameField.setValue("testuser");
-		firstNameField.setValue("Test");
-		lastNameField.setValue("User");
-		passwordField.setValue("password123");
+		TextField usernameField = $(TextField.class).withCaption("Username").single();
+		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
+		TextField lastNameField = $(TextField.class).withCaption("Last Name").single();
+		PasswordField passwordField = $(PasswordField.class).withCaption("Password").single();
+		MultiSelectComboBox<String> roleMultiSelect = $(MultiSelectComboBox.class).withCaption("Roles").single();
+
+		test(usernameField).setValue("testuser");
+		test(firstNameField).setValue("Test");
+		test(lastNameField).setValue("User");
+		test(passwordField).setValue("password123");
 		roleMultiSelect.setValue(Set.of(Role.USER));
 
-		var saveButton = _get(Button.class, spec -> spec.withText("Save"));
-		_click(saveButton);
+		Button saveButton = $(Button.class).withText("Save").single();
+		test(saveButton).click();
 
-		assertThat(GridKt._size(grid)).isEqualTo(initialSize + 1);
+		assertThat(test(grid).size()).isEqualTo(initialSize + 1);
 	}
 
 	@Test
 	void save_existing_user() {
-		UI.getCurrent().navigate(UserView.class, "user");
+		navigate(UserView.class, "user");
 
-		var firstNameField = _get(TextField.class, spec -> spec.withLabel("First Name"));
-		var passwordField = _get(PasswordField.class, spec -> spec.withLabel("Password"));
-		_setValue(passwordField, "password");
+		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
+		PasswordField passwordField = $(PasswordField.class).withCaption("Password").single();
+		test(passwordField).setValue("password");
 
-		var updatedFirstName = "UpdatedJohn";
+		String updatedFirstName = "UpdatedJohn";
+		test(firstNameField).setValue(updatedFirstName);
 
-		firstNameField.setValue(updatedFirstName);
+		Button saveButton = $(Button.class).withText("Save").single();
+		test(saveButton).click();
 
-		var saveButton = _get(Button.class, spec -> spec.withText("Save"));
-		_click(saveButton);
-
-		UI.getCurrent().navigate(UserView.class, "user");
-		var updatedFirstNameField = _get(TextField.class, spec -> spec.withLabel("First Name"));
+		navigate(UserView.class, "user");
+		TextField updatedFirstNameField = $(TextField.class).withCaption("First Name").single();
 		assertThat(updatedFirstNameField.getValue()).isEqualTo(updatedFirstName);
 	}
 
 	@Test
 	void save_validation_fails_for_empty_required_fields() {
-		var addIcon = _get(SvgIcon.class);
-		_click(addIcon);
+		navigate(UserView.class);
 
-		var saveButton = _get(Button.class, spec -> spec.withText("Save"));
-		_click(saveButton);
+		Grid<UserWithRoles> grid = $(Grid.class).single();
+		SvgIcon addIcon = (SvgIcon) grid.getColumnByKey("actions").getHeaderComponent();
+		test(addIcon).click();
 
-		var usernameField = _get(TextField.class, spec -> spec.withLabel("Username"));
-		var firstNameField = _get(TextField.class, spec -> spec.withLabel("First Name"));
-		var lastNameField = _get(TextField.class, spec -> spec.withLabel("Last Name"));
-		var passwordField = _get(PasswordField.class, spec -> spec.withLabel("Password"));
+		Button saveButton = $(Button.class).withText("Save").single();
+		test(saveButton).click();
+
+		TextField usernameField = $(TextField.class).withCaption("Username").single();
+		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
+		TextField lastNameField = $(TextField.class).withCaption("Last Name").single();
+		PasswordField passwordField = $(PasswordField.class).withCaption("Password").single();
 
 		assertThat(usernameField.isInvalid()).isTrue();
 		assertThat(firstNameField.isInvalid()).isTrue();
@@ -140,17 +135,20 @@ class UserViewTest extends KaribuTest {
 
 	@Test
 	void cancel_button_clears_form_and_refreshes_grid() {
-		var addIcon = _get(SvgIcon.class);
-		_click(addIcon);
+		navigate(UserView.class);
 
-		var usernameField = _get(TextField.class, spec -> spec.withLabel("Username"));
-		var firstNameField = _get(TextField.class, spec -> spec.withLabel("First Name"));
+		Grid<UserWithRoles> grid = $(Grid.class).single();
+		SvgIcon addIcon = (SvgIcon) grid.getColumnByKey("actions").getHeaderComponent();
+		test(addIcon).click();
 
-		usernameField.setValue("testuser");
-		firstNameField.setValue("Test");
+		TextField usernameField = $(TextField.class).withCaption("Username").single();
+		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
 
-		var cancelButton = _get(Button.class, spec -> spec.withText("Cancel"));
-		_click(cancelButton);
+		test(usernameField).setValue("testuser");
+		test(firstNameField).setValue("Test");
+
+		Button cancelButton = $(Button.class).withText("Cancel").single();
+		test(cancelButton).click();
 
 		assertThat(usernameField.getValue()).isEmpty();
 		assertThat(firstNameField.getValue()).isEmpty();

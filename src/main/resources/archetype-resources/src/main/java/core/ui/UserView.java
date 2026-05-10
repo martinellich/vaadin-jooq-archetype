@@ -1,10 +1,10 @@
 package ${package}.core.ui;
 
+import ch.martinelli.oss.vaadinjooq.util.VaadinJooqUtil;
 import ${package}.core.domain.Role;
 import ${package}.core.domain.UserDAO;
 import ${package}.core.domain.UserWithRoles;
 import ${package}.core.ui.components.Notifier;
-import ch.martinelli.oss.vaadinjooq.util.VaadinJooqUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;

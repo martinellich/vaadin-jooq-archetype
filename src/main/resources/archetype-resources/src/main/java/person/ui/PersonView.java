@@ -1,10 +1,10 @@
 package ${package}.person.ui;
 
+import ch.martinelli.oss.vaadinjooq.util.VaadinJooqUtil;
 import ${package}.core.domain.Role;
 import ${package}.core.ui.components.Notifier;
 import ${package}.db.tables.records.PersonRecord;
 import ${package}.person.domain.PersonDAO;
-import ch.martinelli.oss.vaadinjooq.util.VaadinJooqUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;

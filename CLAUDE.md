@@ -51,16 +51,16 @@ When adding new features, create a new module package (e.g., `product`, `order`)
 ## Technology Stack
 
 ### Core Technologies
-- **Spring Boot 3.5.8**: Application framework (Java 25)
-- **Vaadin 24.9.5**: UI framework (server-side Java UI)
-- **jOOQ 3.20.8**: Type-safe database access
+- **Spring Boot 4.0.6**: Application framework (Java 25)
+- **Vaadin 25.1.5**: UI framework (server-side Java UI)
+- **jOOQ 3.21.3**: Type-safe database access
 - **PostgreSQL**: Database (via Testcontainers for development)
 - **Spring Security**: Authentication and authorization with JWT tokens
 - **Flyway**: Database migrations
 
 ### Key Libraries
-- **jooq-spring** (0.4.0): jOOQ integration with Spring transactions
-- **vaadin-jooq** (2.0.4): Vaadin Grid data providers for jOOQ
+- **jooq-spring** (1.1.1): jOOQ integration with Spring transactions
+- **vaadin-jooq** (2.1.3): Vaadin Grid data providers for jOOQ
 - **Line Awesome**: Icon library
 
 ## Database and jOOQ Code Generation
@@ -112,9 +112,10 @@ Application runs on port 8080 with remote debugging on port 5679.
 ### Testing Strategy
 Generated applications include three types of tests:
 
-1. **Unit Tests** (`*Test.java`): Karibu Testing for Vaadin UI components
-   - Extend `KaribuTest` base class
-   - Provides `login(username, roles)` and `logout()` helpers
+1. **Unit Tests** (`*Test.java`): Vaadin Browserless Testing for server-side UI tests
+   - Extend `AbstractBrowserlessTest` base class (extends Vaadin's `SpringBrowserlessTest`)
+   - Use `$()` to query components and `test(...)` to wrap testers (`navigate()`, `setValue()`, `click()`, etc.)
+   - Use Spring Security's `@WithMockUser` to simulate authenticated users
    - Mock Spring context with `TestcontainersConfiguration`
 
 2. **Integration Tests** (`*IT.java`): Playwright for end-to-end browser testing
