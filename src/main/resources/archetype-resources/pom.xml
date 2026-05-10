@@ -451,8 +451,8 @@
                         <version>${jacoco.version}</version>
                         <configuration>
                             <excludes>
-                                <exclude>${package}.Application</exclude>
-                                <exclude>${package}.db.**</exclude>
+                                <exclude>${packageInPathFormat}/Application.class</exclude>
+                                <exclude>${packageInPathFormat}/db/**/*.class</exclude>
                             </excludes>
                         </configuration>
                         <executions>
