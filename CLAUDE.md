@@ -112,9 +112,10 @@ Application runs on port 8080 with remote debugging on port 5679.
 ### Testing Strategy
 Generated applications include three types of tests:
 
-1. **Unit Tests** (`*Test.java`): Karibu Testing for Vaadin UI components
-   - Extend `KaribuTest` base class
-   - Provides `login(username, roles)` and `logout()` helpers
+1. **Unit Tests** (`*Test.java`): Vaadin Browserless Testing for server-side UI tests
+   - Extend `AbstractBrowserlessTest` base class (extends Vaadin's `SpringBrowserlessTest`)
+   - Use `$()` to query components and `test(...)` to wrap testers (`navigate()`, `setValue()`, `click()`, etc.)
+   - Use Spring Security's `@WithMockUser` to simulate authenticated users
    - Mock Spring context with `TestcontainersConfiguration`
 
 2. **Integration Tests** (`*IT.java`): Playwright for end-to-end browser testing
