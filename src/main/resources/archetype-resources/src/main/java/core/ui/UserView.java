@@ -110,7 +110,9 @@ public class UserView extends Div implements HasUrlParameter<String>, HasDynamic
 			.setSortable(true)
 			.setSortProperty(USER.LAST_NAME.getName())
 			.setAutoWidth(true);
-		grid.addColumn(u -> String.join(", ", u.getRoles())).setHeader(getTranslation("user.field.roles")).setAutoWidth(true);
+		grid.addColumn(u -> String.join(", ", u.getRoles()))
+			.setHeader(getTranslation("user.field.roles"))
+			.setAutoWidth(true);
 
 		var addIcon = LineAwesomeIcon.PLUS_SOLID.create();
 		addIcon.addClickListener(_ -> clearForm());
