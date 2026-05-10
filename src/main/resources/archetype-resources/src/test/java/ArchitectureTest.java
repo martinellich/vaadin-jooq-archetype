@@ -33,8 +33,6 @@ class ArchitectureTest {
 
 	private static final String GREETING_MODULE = "..greeting..";
 
-	private static final String PERSON_MODULE = "..person..";
-
 	private final JavaClasses classes = new ClassFileImporter().importPackages(PACKAGE_ROOT);
 
 	@Test
@@ -62,26 +60,6 @@ class ArchitectureTest {
 			.resideInAPackage(CORE_MODULE)
 			.should()
 			.accessClassesThat()
-			.resideInAnyPackage(GREETING_MODULE, PERSON_MODULE)
-			.check(classes);
-	}
-
-	@Test
-	void module_check_greeting_may_only_use_core() {
-		noClasses().that()
-			.resideInAPackage(GREETING_MODULE)
-			.should()
-			.dependOnClassesThat()
-			.resideInAnyPackage(PERSON_MODULE)
-			.check(classes);
-	}
-
-	@Test
-	void module_check_operson_may_only_use_core() {
-		noClasses().that()
-			.resideInAPackage(PERSON_MODULE)
-			.should()
-			.dependOnClassesThat()
 			.resideInAnyPackage(GREETING_MODULE)
 			.check(classes);
 	}
