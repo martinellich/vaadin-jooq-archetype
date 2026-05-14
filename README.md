@@ -9,8 +9,6 @@ mvn archetype:generate                               \
 -DarchetypeGroupId=ch.martinelli.oss                 \
 -DarchetypeArtifactId=vaadin-jooq-archetype          \
 -DarchetypeVersion=1.1.7                             \
--DgroupId=<my.groupId>                               \
--DartifactId=<my.artifactId>
 ```
 
 ## Release Notes
