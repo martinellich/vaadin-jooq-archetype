@@ -9,17 +9,15 @@
                 <include>.gitignore</include>
                 <include>mvnw</include>
                 <include>mvnw.cmd</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true">
+            <includes>
                 <include>README.md</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>.mvn</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>src/main/frontend</directory>
             <includes>
                 <include>**/*</include>
             </includes>

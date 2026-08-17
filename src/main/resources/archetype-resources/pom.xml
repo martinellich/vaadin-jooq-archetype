@@ -38,7 +38,7 @@
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
 
         <db.image>postgres:latest</db.image>
-        <db.username>${package}</db.username>
+        <db.username>${artifactId}</db.username>
         <db.password>secret</db.password>
     </properties>
 
