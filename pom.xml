@@ -4,7 +4,7 @@
 
     <groupId>ch.martinelli.oss</groupId>
     <artifactId>vaadin-jooq-archetype</artifactId>
-    <version>1.1.7</version>
+    <version>1.2.0</version>
     <packaging>maven-archetype</packaging>
 
 
@@ -37,6 +37,22 @@
             </extension>
         </extensions>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <!-- Keep .gitignore in the archetype JAR; Maven's default excludes would strip it -->
+                    <addDefaultExcludes>false</addDefaultExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <configuration>
+                    <!-- Keep .gitignore in the archetype JAR -->
+                    <useDefaultExcludes>false</useDefaultExcludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.amashchenko.maven.plugin</groupId>
                 <artifactId>gitflow-maven-plugin</artifactId>
@@ -101,7 +117,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.10.0</version>
+                        <version>0.11.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
