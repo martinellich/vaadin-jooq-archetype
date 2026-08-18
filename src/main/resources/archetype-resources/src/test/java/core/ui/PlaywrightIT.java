@@ -2,7 +2,6 @@ package ${package}.core.ui;
 
 import ${package}.TestcontainersConfiguration;
 import com.microsoft.playwright.*;
-import in.virit.mopo.Mopo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,8 +25,6 @@ public abstract class PlaywrightIT {
 
 	private BrowserContext browserContext;
 
-	protected Mopo mopo;
-
 	@BeforeAll
 	static void setUpClass() {
 		playwright = Playwright.create();
@@ -48,7 +45,6 @@ public abstract class PlaywrightIT {
 	void setUp() {
 		browserContext = browser.newContext();
 		page = browserContext.newPage();
-		mopo = new Mopo(page);
 	}
 
 	@AfterEach
