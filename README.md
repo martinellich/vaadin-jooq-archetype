@@ -8,10 +8,13 @@ https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-st
 mvn archetype:generate                               \
 -DarchetypeGroupId=ch.martinelli.oss                 \
 -DarchetypeArtifactId=vaadin-jooq-archetype          \
--DarchetypeVersion=1.2.0
+-DarchetypeVersion=1.3.0
 ```
 
 ## Release Notes
+
+### 1.3.0
+- Exchanged Vaadin Playwright helper Mopo with Dramafinder
 
 ### 1.2.0
 - Dependency updates

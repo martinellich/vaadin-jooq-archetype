@@ -28,7 +28,7 @@
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
 
         <playwright.version>1.59.0</playwright.version>
-        <mopo.version>0.0.6</mopo.version>
+        <dramafinder.version>1.1.6</dramafinder.version>
         <archunit.version>1.4.2</archunit.version>
         <jacoco.version>0.8.14</jacoco.version>
 
@@ -188,9 +188,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>in.virit</groupId>
-            <artifactId>mopo</artifactId>
-            <version>${mopo.version}</version>
+            <groupId>org.vaadin.addons</groupId>
+            <artifactId>dramafinder</artifactId>
+            <version>${dramafinder.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

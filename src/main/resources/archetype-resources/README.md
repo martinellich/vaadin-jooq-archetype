@@ -30,7 +30,7 @@ There are two base classes:
 - `AbstractBrowserlessTest` can be used for fast [browserless testing](https://vaadin.com/docs/latest/flow/testing/browserless), aka UI unit test. It extends Vaadin's `SpringBrowserlessTest`, which sets up a Vaadin mock environment without a browser. Use Spring Security's `@WithMockUser` to simulate authenticated users.
 - `PlaywrightIT` configures Playwright for E2E tests. This class uses SpringBootTest at a random port.
 
-The Playwright test uses [Mopo](https://github.com/viritin/mopo), which simplifies the testing of Vaadin applications with Playwright.
+The Playwright test uses [Drama Finder](https://github.com/parttio/dramafinder), which provides type-safe element wrappers with accessibility-first APIs for testing Vaadin applications with Playwright.
 
 ## Deploying to Production
 
