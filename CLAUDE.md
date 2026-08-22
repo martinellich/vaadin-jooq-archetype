@@ -51,9 +51,9 @@ When adding new features, create a new module package (e.g., `product`, `order`)
 ## Technology Stack
 
 ### Core Technologies
-- **Spring Boot 4.0.6**: Application framework (Java 25)
-- **Vaadin 25.1.5**: UI framework (server-side Java UI)
-- **jOOQ 3.21.3**: Type-safe database access
+- **Spring Boot 4.1.0**: Application framework (Java 25)
+- **Vaadin 25.2.6**: UI framework (server-side Java UI)
+- **jOOQ 3.21.7**: Type-safe database access
 - **PostgreSQL**: Database (via Testcontainers for development)
 - **Spring Security**: Authentication and authorization with JWT tokens
 - **Flyway**: Database migrations
@@ -114,7 +114,7 @@ Generated applications include three types of tests:
 
 1. **Unit Tests** (`*Test.java`): Vaadin Browserless Testing for server-side UI tests
    - Extend `AbstractBrowserlessTest` base class (extends Vaadin's `SpringBrowserlessTest`)
-   - Use `$()` to query components and `test(...)` to wrap testers (`navigate()`, `setValue()`, `click()`, etc.)
+   - Use `find(...)` to query components and `test(...)` to wrap testers (`navigate()`, `setValue()`, `click()`, etc.)
    - Use Spring Security's `@WithMockUser` to simulate authenticated users
    - Mock Spring context with `TestcontainersConfiguration`
 

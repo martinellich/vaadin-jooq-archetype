@@ -11,7 +11,7 @@ class LoginViewTest extends AbstractBrowserlessTest {
 	void navigate_to_login() {
 		navigate(LoginView.class);
 
-		H2 title = $(H2.class).withText("Login").single();
+		H2 title = find(H2.class).withText("Login").single();
 		assertThat(title).isNotNull();
 	}
 

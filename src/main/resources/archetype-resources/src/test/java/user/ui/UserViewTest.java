@@ -26,7 +26,7 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void check_grid_size() {
 		navigate(UserView.class);
 
-		Grid<UserWithRoles> grid = $(Grid.class).single();
+		Grid<UserWithRoles> grid = find(Grid.class).single();
 		assertThat(test(grid).size()).isEqualTo(2);
 	}
 
@@ -34,7 +34,7 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void navigate_to_user() {
 		navigate(UserView.class, "admin");
 
-		Grid<UserWithRoles> grid = $(Grid.class).single();
+		Grid<UserWithRoles> grid = find(Grid.class).single();
 		assertThat(test(grid).size()).isEqualTo(2);
 
 		Set<UserWithRoles> selectedItems = grid.getSelectedItems();
@@ -43,7 +43,7 @@ class UserViewTest extends AbstractBrowserlessTest {
 			.extracting(userWithRoles -> userWithRoles.getUser().getFirstName())
 			.isEqualTo("Emma");
 
-		TextField firstNameTextField = $(TextField.class).withCaption("First Name").single();
+		TextField firstNameTextField = find(TextField.class).withCaption("First Name").single();
 		assertThat(firstNameTextField.getValue()).isEqualTo("Emma");
 	}
 
@@ -51,14 +51,14 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void delete_person() {
 		navigate(UserView.class);
 
-		Grid<UserWithRoles> grid = $(Grid.class).single();
+		Grid<UserWithRoles> grid = find(Grid.class).single();
 		assertThat(test(grid).size()).isEqualTo(2);
 
 		Component component = test(grid).getCellComponent(0, "actions");
 		assertThat(component).isInstanceOf(SvgIcon.class);
 		test((SvgIcon) component).click();
 
-		ConfirmDialog confirmDialog = $(ConfirmDialog.class).single();
+		ConfirmDialog confirmDialog = find(ConfirmDialog.class).single();
 		test(confirmDialog).confirm();
 
 		assertThat(test(grid).size()).isEqualTo(1);
@@ -68,17 +68,17 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void save_new_user() {
 		navigate(UserView.class);
 
-		Grid<UserWithRoles> grid = $(Grid.class).single();
+		Grid<UserWithRoles> grid = find(Grid.class).single();
 		int initialSize = test(grid).size();
 
 		SvgIcon addIcon = (SvgIcon) grid.getColumnByKey("actions").getHeaderComponent();
 		test(addIcon).click();
 
-		TextField usernameField = $(TextField.class).withCaption("Username").single();
-		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
-		TextField lastNameField = $(TextField.class).withCaption("Last Name").single();
-		PasswordField passwordField = $(PasswordField.class).withCaption("Password").single();
-		MultiSelectComboBox<String> roleMultiSelect = $(MultiSelectComboBox.class).withCaption("Roles").single();
+		TextField usernameField = find(TextField.class).withCaption("Username").single();
+		TextField firstNameField = find(TextField.class).withCaption("First Name").single();
+		TextField lastNameField = find(TextField.class).withCaption("Last Name").single();
+		PasswordField passwordField = find(PasswordField.class).withCaption("Password").single();
+		MultiSelectComboBox<String> roleMultiSelect = find(MultiSelectComboBox.class).withCaption("Roles").single();
 
 		test(usernameField).setValue("testuser");
 		test(firstNameField).setValue("Test");
@@ -86,7 +86,7 @@ class UserViewTest extends AbstractBrowserlessTest {
 		test(passwordField).setValue("password123");
 		roleMultiSelect.setValue(Set.of(Role.USER));
 
-		Button saveButton = $(Button.class).withText("Save").single();
+		Button saveButton = find(Button.class).withText("Save").single();
 		test(saveButton).click();
 
 		assertThat(test(grid).size()).isEqualTo(initialSize + 1);
@@ -96,18 +96,18 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void save_existing_user() {
 		navigate(UserView.class, "user");
 
-		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
-		PasswordField passwordField = $(PasswordField.class).withCaption("Password").single();
+		TextField firstNameField = find(TextField.class).withCaption("First Name").single();
+		PasswordField passwordField = find(PasswordField.class).withCaption("Password").single();
 		test(passwordField).setValue("password");
 
 		String updatedFirstName = "UpdatedJohn";
 		test(firstNameField).setValue(updatedFirstName);
 
-		Button saveButton = $(Button.class).withText("Save").single();
+		Button saveButton = find(Button.class).withText("Save").single();
 		test(saveButton).click();
 
 		navigate(UserView.class, "user");
-		TextField updatedFirstNameField = $(TextField.class).withCaption("First Name").single();
+		TextField updatedFirstNameField = find(TextField.class).withCaption("First Name").single();
 		assertThat(updatedFirstNameField.getValue()).isEqualTo(updatedFirstName);
 	}
 
@@ -115,17 +115,17 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void save_validation_fails_for_empty_required_fields() {
 		navigate(UserView.class);
 
-		Grid<UserWithRoles> grid = $(Grid.class).single();
+		Grid<UserWithRoles> grid = find(Grid.class).single();
 		SvgIcon addIcon = (SvgIcon) grid.getColumnByKey("actions").getHeaderComponent();
 		test(addIcon).click();
 
-		Button saveButton = $(Button.class).withText("Save").single();
+		Button saveButton = find(Button.class).withText("Save").single();
 		test(saveButton).click();
 
-		TextField usernameField = $(TextField.class).withCaption("Username").single();
-		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
-		TextField lastNameField = $(TextField.class).withCaption("Last Name").single();
-		PasswordField passwordField = $(PasswordField.class).withCaption("Password").single();
+		TextField usernameField = find(TextField.class).withCaption("Username").single();
+		TextField firstNameField = find(TextField.class).withCaption("First Name").single();
+		TextField lastNameField = find(TextField.class).withCaption("Last Name").single();
+		PasswordField passwordField = find(PasswordField.class).withCaption("Password").single();
 
 		assertThat(usernameField.isInvalid()).isTrue();
 		assertThat(firstNameField.isInvalid()).isTrue();
@@ -137,17 +137,17 @@ class UserViewTest extends AbstractBrowserlessTest {
 	void cancel_button_clears_form_and_refreshes_grid() {
 		navigate(UserView.class);
 
-		Grid<UserWithRoles> grid = $(Grid.class).single();
+		Grid<UserWithRoles> grid = find(Grid.class).single();
 		SvgIcon addIcon = (SvgIcon) grid.getColumnByKey("actions").getHeaderComponent();
 		test(addIcon).click();
 
-		TextField usernameField = $(TextField.class).withCaption("Username").single();
-		TextField firstNameField = $(TextField.class).withCaption("First Name").single();
+		TextField usernameField = find(TextField.class).withCaption("Username").single();
+		TextField firstNameField = find(TextField.class).withCaption("First Name").single();
 
 		test(usernameField).setValue("testuser");
 		test(firstNameField).setValue("Test");
 
-		Button cancelButton = $(Button.class).withText("Cancel").single();
+		Button cancelButton = find(Button.class).withText("Cancel").single();
 		test(cancelButton).click();
 
 		assertThat(usernameField.getValue()).isEmpty();

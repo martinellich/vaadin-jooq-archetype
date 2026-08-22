@@ -13,10 +13,10 @@ class HelloWorldViewTest extends AbstractBrowserlessTest {
 	void shows_hello_world_title() {
 		navigate(HelloWorldView.class);
 
-		Div appName = $(Div.class).withClassName("text-xl").single();
+		Div appName = find(Div.class).withClassName("text-xl").single();
 		assertThat(appName.getText()).isEqualTo("Vaadin jOOQ Template");
 
-		H2 title = $(H2.class).single();
+		H2 title = find(H2.class).single();
 		assertThat(title.getText()).isEqualTo("Hello World");
 	}
 
